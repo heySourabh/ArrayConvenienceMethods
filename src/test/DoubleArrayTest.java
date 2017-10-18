@@ -6,7 +6,7 @@ import util.DoubleArray;
 import java.util.Arrays;
 import java.util.Random;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 public class DoubleArrayTest {
 
@@ -76,9 +76,14 @@ public class DoubleArrayTest {
             }
         }
 
+        // With precondition
         double[] computedTotal = Arrays.stream(arrays)
                 .reduce(DoubleArray.zeros(100), DoubleArray::add);
+        assertArrayEquals(expectedTotal, computedTotal, 1e-15);
 
+        // Without precondition
+        computedTotal = Arrays.stream(arrays)
+                .reduce(DoubleArray::add).orElse(DoubleArray.zeros(100));
         assertArrayEquals(expectedTotal, computedTotal, 1e-15);
     }
 }
