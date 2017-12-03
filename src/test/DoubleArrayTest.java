@@ -45,6 +45,16 @@ public class DoubleArrayTest {
     }
 
     @Test
+    public void copy() throws Exception {
+        double[] from = DoubleArray.random(500);
+        double[] to = new double[from.length];
+
+        DoubleArray.copy(from, to);
+
+        assertArrayEquals(from, to, 1e-15);
+    }
+
+    @Test
     public void zeros() throws Exception {
         double[] expectedArray = new double[400];
 
